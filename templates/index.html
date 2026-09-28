@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seasonal Crop Advisor</title>
+
+    <!-- Font -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body id="top">
+
+    <!-- ================= ANIMATED SPLASH SCREEN ================= -->
+    <div class="splash-screen" id="splashScreen" aria-label="Seasonal Crop Advisor loading">
+
+        <div class="splash-content">
+
+            <div class="splash-sun"></div>
+
+            <span class="splash-particle"></span>
+            <span class="splash-particle"></span>
+            <span class="splash-particle"></span>
+            <span class="splash-particle"></span>
+
+            <div class="splash-plant-wrap" aria-hidden="true">
+
+                <svg class="splash-plant"
+                     viewBox="0 0 330 430"
+                     xmlns="http://www.w3.org/2000/svg">
+
+                    <!-- Natural curved stem -->
+                    <path class="splash-stem"
+                          d="M165 398
+                             C162 355 163 316 164 274
+                             C165 230 164 188 166 143
+                             C167 106 168 68 170 38"
+                          fill="none"
+                          stroke="#4d9b3d"
+                          stroke-width="12"
+                          stroke-linecap="round"/>
+
+                    <!-- Top leaf -->
+                    <g class="splash-leaf splash-leaf-1">
+                        <path d="M169 105
+                                 C150 70 140 35 153 8
+                                 C185 25 205 55 170 105Z"
+                              fill="#78b83f"/>
+                        <path d="M169 100
+                                 C166 65 158 35 153 10"
+                              stroke="#c5df72"
+                              stroke-width="2"
+                              fill="none"/>
+                    </g>
+
+                    <!-- Upper left leaf -->
+                    <g class="splash-leaf splash-leaf-2">
+                        <path d="M166 155
+                                 C130 145 83 120 62 137
+                                 C86 172 125 183 166 155Z"
+                              fill="#5fa83d"/>
+                        <path d="M158 156
+                                 C125 150 92 142 67 138"
+                              stroke="#b9db69"
+                              stroke-width="2"
+                              fill="none"/>
+                    </g>
+
+                    <!-- Upper right leaf -->
+                    <g class="splash-leaf splash-leaf-3">
+                        <path d="M168 145
+                                 C194 105 230 82 275 91
+                                 C258 126 219 153 168 145Z"
+                              fill="#70b342"/>
+                        <path d="M175 142
+                                 C207 124 239 103 272 93"
+                              stroke="#c5df72"
+                              stroke-width="2"
+                              fill="none"/>
+                    </g>
+
+                    <!-- Lower left leaf -->
+                    <g class="splash-leaf splash-leaf-4">
+                        <path d="M165 245
+                                 C130 218 88 205 60 224
+                                 C86 257 123 267 165 245Z"
+                              fill="#559f3b"/>
+                        <path d="M157 244
+                                 C125 236 92 229 64 225"
+                              stroke="#b8d96b"
+                              stroke-width="2"
+                              fill="none"/>
+                    </g>
+
+                    <!-- Lower right leaf -->
+                    <g class="splash-leaf splash-leaf-5">
+                        <path d="M166 225
+                                 C207 191 252 187 285 211
+                                 C259 243 213 251 166 225Z"
+                              fill="#67aa3e"/>
+                        <path d="M175 225
+                                 C210 214 248 207 280 211"
+                              stroke="#c5df72"
+                              stroke-width="2"
+                              fill="none"/>
+                    </g>
+
+                    <!-- Roots -->
+                    <path d="M165 390 C150 405 145 418 138 430"
+                          stroke="#8a6035" stroke-width="4"
+                          fill="none" stroke-linecap="round"/>
+                    <path d="M166 390 C177 406 185 420 191 431"
+                          stroke="#8a6035" stroke-width="4"
+                          fill="none" stroke-linecap="round"/>
+                    <path d="M162 395 C157 412 157 422 154 433"
+                          stroke="#8a6035" stroke-width="3"
+                          fill="none" stroke-linecap="round"/>
+                </svg>
+
+                <div class="splash-soil"></div>
+            </div>
+
+            <div class="splash-brand">
+                <div class="splash-small-title">
+                    AGRICULTURAL INTELLIGENCE
+                </div>
+
+                <div class="splash-main-title">
+                    Seasonal<br>
+                    <span>Crop Advisor</span>
+                </div>
+
+                <div class="splash-line"></div>
+
+                <div class="splash-tagline">
+                    PREDICT &nbsp; • &nbsp; PLANT &nbsp; • &nbsp; GROW
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ================= NAVIGATION ================= -->
+
+    <header>
+        <div class="container nav">
+
+            <a href="#top" class="logo" aria-label="Seasonal Crop Advisor home">
+
+                <span class="logo-mark" aria-hidden="true">
+
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F4E8C1" stroke-width="1.6">
+                        <path d="M12 21V9" />
+                        <path d="M12 9C12 5 9 3 5 3c0 4 3 6 7 6z" />
+                        <path d="M12 13c0-4 3-6 7-6 0 4-3 6-7 6z" />
+                    </svg>
+
+                </span>
+
+                <span class="logo-text">
+                    Seasonal Crop Advisor
+                </span>
+
+            </a>
+
+        </div>
+    </header>
+
+    <!-- Hamburger -->
+
+    <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="navDrawer">
+
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Navigation Drawer -->
+
+    <nav class="nav-drawer" id="navDrawer" aria-label="Main navigation">
+
+        <a href="#top" data-drawer-close>
+            Home
+        </a>
+
+        <a href="#prediction" data-drawer-close>
+            Crop Prediction
+        </a>
+
+        <a href="#about" data-drawer-close>
+            About
+        </a>
+
+        <a href="{{ url_for('admin_login') }}" class="admin-login-link" data-drawer-close>
+            🔐 Admin Login
+        </a>
+
+    </nav>
+
+    <main>
+
+        <!-- ================= HERO ================= -->
+
+        <section class="hero">
+
+            <div class="hero-frame">
+
+                <div class="container hero-inner">
+
+                    <p class="hero-eyebrow">
+                        Agricultural Intelligence
+                    </p>
+
+                    <h1>
+                        Seasonal Crop<br>
+                        Advisor
+                    </h1>
+
+                    <p class="hero-tagline">
+                        Predict. Plant. Grow.
+                    </p>
+
+                    <p class="hero-sub">
+                        Identify suitable crops for your field based on
+                        soil conditions, nutrient levels, and the growing
+                        season — quickly and simply.
+                    </p>
+
+                    <a href="#prediction" class="btn">
+                        Start Prediction
+                    </a>
+
+
+                </div>
+
+                <span class="corner tl" aria-hidden="true"></span>
+                <span class="corner tr" aria-hidden="true"></span>
+                <span class="corner bl" aria-hidden="true"></span>
+                <span class="corner br" aria-hidden="true"></span>
+
+            </div>
+
+        </section>
+
+        <!-- ================= HOW IT WORKS ================= -->
+
+        <section class="how-it-works">
+
+            <div class="container">
+
+                <p class="section-label centered">
+                    How It Works
+                </p>
+
+                <h2 class="section-title centered">
+                    Three simple steps to your crop
+                </h2>
+
+                <div class="steps-grid">
+
+                    <div class="step-card">
+
+                        <span class="step-num">
+                            01
+                        </span>
+
+                        <h3>
+                            Describe Your Soil
+                        </h3>
+
+                        <p>
+                            Enter your soil type, pH level, and the
+                            N, P, K nutrient values of your soil.
+                        </p>
+
+                    </div>
+
+                    <div class="step-card">
+
+                        <span class="step-num">
+                            02
+                        </span>
+
+                        <h3>
+                            Choose Your Season
+                        </h3>
+
+                        <p>
+                            Select whether you are planting in the
+                            rainy, summer, or winter season.
+                        </p>
+
+                    </div>
+
+                    <div class="step-card">
+
+                        <span class="step-num">
+                            03
+                        </span>
+
+                        <h3>
+                            Get Recommendations
+                        </h3>
+
+                        <p>
+                            Receive the crop prediction based on
+                            your soil, nutrients, pH, and season.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- ================= PREDICTION ================= -->
+
+        <section class="prediction" id="prediction">
+
+            <div class="container">
+
+                <div class="prediction-intro">
+
+                    <p class="section-label centered">
+                        Crop Prediction
+                    </p>
+
+                    <h2 class="centered">
+                        Find the right crop for your season.
+                    </h2>
+
+                    <p class="prediction-desc centered-text">
+                        Tell us about your soil, pH, and nutrient
+                        composition (N, P, K), then choose the
+                        growing season.
+                    </p>
+
+                    <p class="prediction-desc centered-text">
+                        Our Random Forest prediction model will
+                        match your conditions and recommend the
+                        most suitable crop.
+                    </p>
+
+                </div>
+
+                <!-- ================= FORM ================= -->
+
+                <form class="form-card" id="predictForm" novalidate>
+
+                    <div class="form-header">
+
+                        <h3>
+                            Prediction Form
+                        </h3>
+
+                        <span class="form-badge">
+                            All fields are required
+                        </span>
+
+                    </div>
+
+                    <!-- ================= SOIL TYPE ================= -->
+
+                    <div class="form-step">
+
+                        <span class="form-step-label">
+                            Soil Type
+                        </span>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <div class="dropdown" id="soilDropdown">
+
+                            <button type="button" class="dropdown-toggle input" id="soilToggle" aria-haspopup="listbox"
+                                aria-expanded="false">
+
+                                <span class="dropdown-value" id="soilValue">
+                                    Select soil type
+                                </span>
+
+                                <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+                                    <path d="M1 1l5 5 5-5" stroke="#123524" stroke-width="2" />
+                                </svg>
+
+                            </button>
+
+                            <ul class="dropdown-list" id="soilList" role="listbox">
+
+                                <li role="option" data-soil="Red Soil">
+                                    Red Soil
+                                </li>
+
+                                <li role="option" data-soil="Black Soil">
+                                    Black Soil
+                                </li>
+
+                                <li role="option" data-soil="Loamy Soil">
+                                    Loamy Soil
+                                </li>
+
+                                <li role="option" data-soil="Alluvial Soil">
+                                    Alluvial Soil
+                                </li>
+
+                                <li role="option" data-soil="Sandy Soil">
+                                    Sandy Soil
+                                </li>
+
+                                <li role="option" data-soil="Laterite Soil">
+                                    Laterite Soil
+                                </li>
+
+                                <li role="option" data-soil="Clay Soil">
+                                    Clay Soil
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <input type="hidden" id="soilType" value="">
+
+                    </div>
+
+                    <p class="error-msg" id="soilError">
+                        Please select a soil type.
+                    </p>
+
+                    <!-- ================= SOIL PH ================= -->
+
+                    <div class="form-step">
+
+                        <span class="form-step-label">
+                            Soil pH
+                        </span>
+
+                    </div>
+
+                    <div class="input-group ph-group" id="phGroup">
+
+                        <input class="input" type="number" step="0.1" min="0" max="14" id="soil_ph" placeholder=" "
+                            required>
+
+                        <label class="user-label" for="soil_ph">
+                            Soil pH (0 – 14)
+                        </label>
+
+                        <!-- pH Slider -->
+
+                        <div class="ph-slider" id="phSlider">
+
+                            <input type="range" id="phRange" min="0" max="14" step="0.1" value="7">
+
+                            <div class="ph-scale">
+                                <span>0</span>
+                                <span>7</span>
+                                <span>14</span>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <p class="error-msg" id="phError">
+                        Enter a valid pH between 0 and 14.
+                    </p>
+
+                    <!-- ================= NPK ================= -->
+
+                    <div class="form-step">
+
+                        <span class="form-step-label">
+                            Nutrient Composition
+                        </span>
+
+                    </div>
+
+                    <div class="npk-grid">
+
+                        <!-- Nitrogen -->
+
+                        <div class="input-group">
+
+                            <input class="input" type="number" min="0" id="nitrogen" placeholder=" " required>
+
+                            <label class="user-label" for="nitrogen">
+                                N (kg/ha)
+                            </label>
+
+                        </div>
+
+                        <!-- Phosphorus -->
+
+                        <div class="input-group">
+
+                            <input class="input" type="number" min="0" id="phosphorus" placeholder=" " required>
+
+                            <label class="user-label" for="phosphorus">
+                                P (kg/ha)
+                            </label>
+
+                        </div>
+
+                        <!-- Potassium -->
+
+                        <div class="input-group">
+
+                            <input class="input" type="number" min="0" id="potassium" placeholder=" " required>
+
+                            <label class="user-label" for="potassium">
+                                K (kg/ha)
+                            </label>
+
+                        </div>
+
+                    </div>
+
+                    <p class="error-msg" id="npkError">
+                        Enter valid numeric values for N, P and K.
+                    </p>
+
+                    <!-- ================= SEASON ================= -->
+
+                    <div class="form-step">
+
+                        <span class="form-step-label">
+                            Growing Season
+                        </span>
+
+                    </div>
+
+                    <div class="input-group">
+
+                        <div class="dropdown" id="seasonDropdown">
+
+                            <button type="button" class="dropdown-toggle input" id="seasonToggle"
+                                aria-haspopup="listbox" aria-expanded="false">
+
+                                <span class="dropdown-value" id="seasonValue">
+                                    Select season
+                                </span>
+
+                                <svg class="dropdown-arrow" width="12" height="8" viewBox="0 0 12 8" fill="none">
+
+                                    <path d="M1 1l5 5 5-5" stroke="#123524" stroke-width="2" />
+
+                                </svg>
+
+                            </button>
+
+                            <ul class="dropdown-list" id="seasonList" role="listbox">
+
+                                <li role="option" data-season="Rainy">
+                                    🌧️ Rainy
+                                </li>
+
+                                <li role="option" data-season="Summer">
+                                    ☀️ Summer
+                                </li>
+
+                                <li role="option" data-season="Winter">
+                                    ❄️ Winter
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <input type="hidden" id="season" value="">
+
+                    </div>
+
+                    <p class="error-msg" id="seasonError">
+                        Please select a season.
+                    </p>
+
+                    <!-- ================= PREDICT BUTTON ================= -->
+
+                    <button type="submit" class="btn btn-full" id="predictBtn">
+                        Predict Crop
+                    </button>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- ================= RESULTS ================= -->
+
+        <section class="results" id="results" aria-live="polite">
+
+            <div class="container">
+
+                <p class="section-label centered">
+                    Results
+                </p>
+
+                <h2 class="centered">
+                    Your Crop Recommendations
+                </h2>
+
+                <!-- Top Recommendation -->
+
+                <div class="top-card">
+
+                    <p class="card-label">
+                        ★ Top Recommendation
+                    </p>
+
+                    <p class="crop-name" id="topCrop">
+                        —
+                    </p>
+
+                    <p class="suitability">
+
+                        <span id="topPct">
+                            —
+                        </span>
+
+                        suitability
+
+                    </p>
+
+                    <div class="suit-bar">
+
+                        <div class="suit-fill" id="topBar"></div>
+
+                    </div>
+
+                </div>
+
+                <!-- Alternative Crops -->
+
+                <div class="next-best">
+
+                    <h3>
+                        Next Best Options
+                    </h3>
+
+                    <div class="alt-card">
+
+                        <span class="alt-rank">
+                            02
+                        </span>
+
+                        <span class="crop-name" id="crop2">
+                            —
+                        </span>
+
+                        <span class="pct" id="pct2">
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="alt-card">
+
+                        <span class="alt-rank">
+                            03
+                        </span>
+
+                        <span class="crop-name" id="crop3">
+                            —
+                        </span>
+
+                        <span class="pct" id="pct3">
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <div class="results-actions">
+
+                    <button class="btn btn-outline" id="predictAgain">
+                        Predict Again
+                    </button>
+
+                </div>
+
+                <p class="disclaimer">
+                    Recommendations are generated by our prediction model.
+                    Always consult local agricultural experts before planting.
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- ================= ABOUT ================= -->
+
+        <section class="about" id="about">
+
+            <div class="container">
+
+                <p class="section-label centered">
+                    About
+                </p>
+
+                <h2 class="centered">
+                    Seasonal Crop Advisor
+                </h2>
+
+                <p class="centered-text">
+
+                    Seasonal Crop Advisor is a web tool designed
+                    to help farmers, students, and agriculture
+                    enthusiasts identify crops suited to their
+                    soil and growing season.
+
+                    The system uses soil type, soil pH,
+                    nitrogen, phosphorus, potassium, and
+                    season as inputs for crop prediction.
+
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <div class="container footer-inner">
+
+            <div class="footer-col">
+
+                <span class="footer-logo">
+                    Seasonal Crop Advisor
+                </span>
+
+                <p>
+                    Predict. Plant. Grow.
+                </p>
+
+            </div>
+
+            <div class="footer-col">
+
+                <span class="footer-title">
+                    Quick Links
+                </span>
+
+                <a href="#top">
+                    Home
+                </a>
+
+                <a href="#prediction">
+                    Crop Prediction
+                </a>
+
+                <a href="#about">
+                    About
+                </a>
+
+            </div>
+
+            <div class="footer-col">
+
+                <span class="footer-title">
+                    Inputs Used
+                </span>
+
+                <span>
+                    Soil Type · Soil pH
+                </span>
+
+                <span>
+                    N · P · K · Season
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+
+            ©
+            <span id="year"></span>
+            Seasonal Crop Advisor — All rights reserved
+
+        </div>
+
+    </footer>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+    
+
+</body>
+
+
+</html>
